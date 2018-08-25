@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/pty4j.iml" filepath="$PROJECT_DIR$/pty4j.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/pty4j_main.iml" filepath="$PROJECT_DIR$/.idea/modules/pty4j_main.iml" group="pty4j" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/pty4j_test.iml" filepath="$PROJECT_DIR$/.idea/modules/pty4j_test.iml" group="pty4j" />
     </modules>
   </component>
 </project>

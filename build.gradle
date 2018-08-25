@@ -1,9 +1,24 @@
 import java.text.SimpleDateFormat
 import org.apache.tools.ant.filters.FixCrLfFilter
 
+buildscript {
+  repositories {
+    jcenter()
+    mavenCentral()
+    maven {
+      url 'https://plugins.gradle.org/m2/'
+    }
+  }
+  dependencies {
+    classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.0'
+  }
+}
+
 plugins {
   id 'java-library'
 }
+
+apply from: './publishing.gradle'
 
 def pathToNativeInJar = 'resources/com/pty4j/native'
 
@@ -14,7 +29,6 @@ sourceSets {
     java {
       srcDirs = ['src']
     }
-    compileClasspath += files('lib/purejavacomm.jar')
   }
   test {
     java {
@@ -23,15 +37,17 @@ sourceSets {
   }
 }
 
+group = "com.ivieleague.pty4j"
+
 compileJava {
-  sourceCompatibility = '1.5'
-  targetCompatibility = '1.5'
+  sourceCompatibility = '1.6'
+  targetCompatibility = '1.6'
   options.debugOptions.debugLevel = 'lines,vars,source'
 }
 
 repositories {
   mavenCentral()
-  flatDir dirs: ['lib']
+  jcenter()
 }
 
 jar {
@@ -76,11 +92,12 @@ task testJar(type: Test, dependsOn: [jar, testClasses]) {
 check.dependsOn test, testJar
 
 dependencies {
-  implementation ':purejavacomm:'
   implementation 'org.jetbrains:annotations:16.0.2'
   implementation 'com.google.guava:guava:14.0.1'
   implementation "log4j:log4j:1.2.14"
   implementation 'net.java.dev.jna:jna:4.1.0'
   implementation 'net.java.dev.jna:jna-platform:4.1.0'
-  testImplementation 'junit:junit:4.12'
+  testImplementation 'junit:junit:4.12'// https://mvnrepository.com/artifact/com.github.purejavacomm/purejavacomm
+  implementation 'com.github.purejavacomm:purejavacomm:1.0.2.RELEASE'
+
 }
